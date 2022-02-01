@@ -14,7 +14,7 @@ locals {
 
   recordsets = {
     for rs in local.records :
-    join(" ", compact(["${rs.name} ${rs.type}", lookup(rs, "set_identifier", "")])) => merge(rs, {
+    join("_", compact(["${rs.name} ${rs.type}", lookup(rs, "set_identifier", "")])) => merge(rs, {
       records = jsonencode(try(rs.records, null))
     })
   }
